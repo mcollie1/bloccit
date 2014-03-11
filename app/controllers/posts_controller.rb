@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
+    @post = current_user.posts.build(params[:post])
     if @post.save
       flash[:notice] = "Post was saved."
       redirect_to @post
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
       flash[:error] = "There was an error saving the post. Please try again."
       render :new
     end
-  end  
+  end
 
   def edit
     @post = Post.find(params[:id])
