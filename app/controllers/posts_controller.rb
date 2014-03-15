@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    authorize @posts
   end
 
   def show
@@ -9,12 +10,12 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    authorize! :create, Post, message: "You need to be a member to create a new post."
+    authorize @post
   end
 
   def create
-    @post = current_user.posts.build(params[:post])
-    authorize! :create, @post, message: "You need to be signed up to do that."
+    @post = current_user.posts.build(params.require(:post).permit(:title, :body))
+    authorize @post
     if @post.save
       flash[:notice] = "Post was saved."
       redirect_to @post
@@ -26,17 +27,29 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    authorize! :edit, @post, message: "You need to own the post to edit it."
+    authorize @post
   end
 
   def update
     @post = Post.find(params[:id])
-    authorize! :update, @post, message: "You need to own the post to edit it."
-    if @post.update_attributes(params[:post])
+    authorize @post
+    if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
       redirect_to @post
     else
       flash[:error] = "There was an error saving the post. Please try again."
+      render :edit
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    authorize @post
+     if @post.update_attributes(params.require(:post).permit(:title, :body))
+      flash[:notice] = "Post was deleted."
+      redirect_to @post
+    else
+      flash[:error] = "There was an error deleting the post. Please try again."
       render :edit
     end
   end

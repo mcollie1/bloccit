@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -16,9 +16,9 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'bootstrap-sass', '~> 2.3.1.0'
+  gem 'sass-rails',   '~> 4.0.0'
+  gem 'coffee-rails', '~> 4.0.0'
+  
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -28,12 +28,14 @@ end
 
 gem 'jquery-rails'
 gem 'faker'
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'turbolinks'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+# gem 'jbuilder', '~> 1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -44,6 +46,15 @@ gem 'faker'
 # To use debugger
 # gem 'debugger'
 
+group :doc do
+  gem 'sdoc', require: false
+end
+
 gem 'newrelic_rpm'
-gem 'devise'
-gem 'cancan'
+gem 'devise', "~>3.2.3"
+gem 'pundit'
+gem 'rails_12factor', group: :production
+gem "activeresource", "~> 4.0.0"
+gem "cancan"
+gem 'protected_attributes'
+gem 'sprockets', '2.11.0'
