@@ -28,7 +28,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :email
       t.string   :encrypted_password
       t.string   :name
-      t.string   :role
       t.datetime :updated_at
       t.string   :unconfirmed_email # Only if using reconfirmable
 
