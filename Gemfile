@@ -59,3 +59,4 @@ gem "cancan"
 gem 'protected_attributes'
 gem 'sprockets', '2.11.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'redcarpet'

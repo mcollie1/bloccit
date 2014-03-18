@@ -4,8 +4,8 @@ require 'faker'
 topics =[]
 15.times do
   topics << Topic.create(
-    name: Faker::Lorem.sentence(1),
-    description: Faker::Lorem.paragraph(1)
+    name: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph
   )
 end
 
@@ -30,8 +30,8 @@ end
     post = Post.create(
       user: user,
       topic: topic,
-      title: Faker::Lorem.sentence(1), 
-      body: Faker::Lorem.paragraph(1))
+      title: Faker::Lorem.sentence, 
+      body: Faker::Lorem.paragraph)
     # set the created_at to a time within the past year
     post.update_attribute(:created_at, Time.now - rand(600..31536000))
 
