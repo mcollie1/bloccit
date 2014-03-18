@@ -4,8 +4,8 @@ require 'faker'
 topics =[]
 15.times do
   topics << Topic.create(
-    name: Faker::Lorem.sentence,
-    description: Faker::Lorem.paragraph
+    name: Faker::Lorem.sentence(1),
+    description: Faker::Lorem.paragraph(1)
   )
 end
 
@@ -30,12 +30,12 @@ end
     post = Post.create(
       user: user,
       topic: topic,
-      title: Faker::Lorem.sentence, 
-      body: Faker::Lorem.paragraph)
+      title: Faker::Lorem.sentence(1), 
+      body: Faker::Lorem.paragraph(1))
     # set the created_at to a time within the past year
     post.update_attribute(:created_at, Time.now - rand(600..31536000))
 
-    topics.rotate
+    topics.rotate!
 
     rand(3..7).times do
       post.comments.create(
@@ -52,7 +52,7 @@ admin = User.new(
   password: 'helloworld',
   password_confirmation: 'helloworld')
 admin.skip_confirmation!
-admin.save!
+admin.save
 admin.update_attribute(:role, 'admin')
 
 # Create a moderator
