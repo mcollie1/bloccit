@@ -67,3 +67,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'figaro'
+
+# Separate out pages of posts and topics
+
+gem 'will_paginate', '~> 3.0.5'
