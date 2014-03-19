@@ -1,8 +1,8 @@
-
 class PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def new
@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @post = current_user.posts.build(post_params)
+    @comment = post.comments.build(comment_params)
     @post.topic = @topic
 
     authorize @post
@@ -61,5 +62,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body, :post_id)
   end
 end

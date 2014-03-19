@@ -14,4 +14,11 @@
       <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
     <% end %>
   </div>
-</div>
+ <div class="col-md-8">
+    <%= render partial: 'comment', collection: { post: @post, comment: @comment } %>
+  </div> 
+  <div class="col-md-8">
+    <%= render partial: 'form', locals: { post: @post, comment: @comment } %>
+  </div> 
+</div> 
+
