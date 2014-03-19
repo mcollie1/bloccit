@@ -60,3 +60,10 @@ gem 'protected_attributes'
 gem 'sprockets', '2.11.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'redcarpet'
+
+# Image uploader gems
+
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+gem 'figaro'
