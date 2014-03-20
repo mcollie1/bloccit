@@ -1,12 +1,12 @@
 require 'faker'
 
-# Create 15 topics
+# Create X number of topics
 topics =[]
 60.times do
   topics << Topic.create(
     name: Faker::Lorem.sentence,
     description: Faker::Lorem.paragraph
-  )
+    )
 end
 
 # Create 5 users with their own posts
@@ -76,6 +76,7 @@ member.save
 
 
 puts "Seed finished"
+puts Faker::Lorem.paragraph(rand(1..4))
 puts "#{Topic.count} topics created"
 puts "#{User.count} users created"
 puts "#{Post.count} posts created"

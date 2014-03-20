@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @posts = @topic.posts.include(:user).include(:comments).paginate(page: params[:page], per_page: 10)
+    @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
   end
 
   def edit
@@ -41,9 +41,23 @@ class TopicsController < ApplicationController
     end
   end
 
+  def destroy
+    @topic = Topic.find(params[:id])
+    name = @topic.name
+
+    authorize @topic
+    if @topic.destroy
+      flash[:notice] = "\"#{name}\" was deleted successfully."
+      redirect_to topics_path
+    else
+      flash[:error] = "There was an error deleting the topic."
+      render :show
+    end
+  end
+
   private
 
   def topic_params
     params.require(:topic).permit(:name, :description, :public)
-  end
+  end  
 end
