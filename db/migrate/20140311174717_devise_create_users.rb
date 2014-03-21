@@ -24,8 +24,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string   :confirmation_token
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
-      t.string   :email
-      t.string   :encrypted_password
+      # t.string   :email # comment this line out?
+      # t.string   :encrypted_password # comment this line out?
       t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable

@@ -3,7 +3,7 @@ require 'faker'
 # Create X number of topics
 topics =[]
 60.times do
-  topics << Topic.create(
+  topics << Topic.create!(
     name: Faker::Lorem.sentence,
     description: Faker::Lorem.paragraph
     )
@@ -18,7 +18,7 @@ end
     password: password, 
     password_confirmation: password)
   user.skip_confirmation!
-  user.save
+  user.save!
 
   # Note: by calling `User.new` instead of `create`,
   # we create an instance of a user which isn't saved to the database.
@@ -27,18 +27,19 @@ end
 
   30.times do
     topic = topics.first
-    post = Post.create(
+    puts "TITLE = #{Faker::Lorem.sentence(6)}"
+    post = Post.create!(
       user: user,
       topic: topic,
-      title: Faker::Lorem.sentence, 
+      title: Faker::Lorem.sentence(6), 
       body: Faker::Lorem.paragraph)
     # set the created_at to a time within the past year
-    post.update_attribute(:created_at, Time.now - rand(600..31536000))
+    post.update_attribute!(:created_at, Time.now - rand(600..31536000))
 
     topics.rotate!
 
     rand(3..7).times do
-      post.comments.create(
+      post.comments.create!(
           body: Faker::Lorem.paragraphs(rand(1..2)).join("\n")
         )
       end
@@ -52,8 +53,8 @@ admin = User.new(
   password: 'helloworld',
   password_confirmation: 'helloworld')
 admin.skip_confirmation!
-admin.save
-admin.update_attribute(:role, 'admin')
+admin.save!
+admin.update_attribute!(:role, 'admin')
 
 # Create a moderator
 moderator = User.new(
@@ -62,8 +63,8 @@ moderator = User.new(
   password: 'helloworld',
   password_confirmation: 'helloworld')
 moderator.skip_confirmation!
-moderator.save
-moderator.update_attribute(:role, 'moderator')
+moderator.save!
+moderator.update_attribute!(:role, 'moderator')
 
 # Create a member
 member = User.new(
@@ -72,7 +73,7 @@ member = User.new(
   password: 'helloworld',
   password_confirmation: 'helloworld')
 member.skip_confirmation!
-member.save
+member.save!
 
 
 puts "Seed finished"
